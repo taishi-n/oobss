@@ -1,0 +1,13 @@
+id: blockbatch_auxiva
+label: Blockbatch AuxIVA
+type: blockbatch_auxiva
+enabled: true
+params:
+  block_size: 200
+  overlap: 0
+  n_iter: 50
+  spatial: ip1
+  source: gauss
+  covariance: batch
+  ref_mic: 0
+  seed: 0

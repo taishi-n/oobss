@@ -1,0 +1,62 @@
+site_name: oobss
+site_description: Open online blind source separation toolkit
+use_directory_urls: false
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - src
+          options:
+            members: true
+            inherited_members: true
+            show_source: true
+            show_root_heading: true
+            show_root_toc_entry: true
+            separate_signature: true
+            docstring_style: numpy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - def_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - .
+        - docs
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Examples: examples.md
+  - API: api.md
+  - Changelog: changelog.md
+  - Style Guide: STYLE.md

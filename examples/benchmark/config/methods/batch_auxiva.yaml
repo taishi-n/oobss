@@ -1,0 +1,11 @@
+id: batch_auxiva
+label: Batch AuxIVA
+type: batch_auxiva
+enabled: true
+params:
+  n_iter: 50
+  spatial: ip1
+  source: gauss
+  covariance: batch
+  ref_mic: 0
+  seed: 0

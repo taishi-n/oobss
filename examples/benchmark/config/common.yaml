@@ -1,0 +1,36 @@
+dataset:
+  type: torchrir_dynamic
+  root: outputs/cmu_arctic_torchrir_dynamic_dataset
+  ref_mic: 0
+  duration_sec: 30.0
+
+stft:
+  fft_size: 2048
+  hop_size: 512
+  window: hann
+
+evaluation:
+  filter_length: 1
+  frame:
+    window_sec: 5.0
+    hop_sec: null
+    compute_permutation: true
+    scaling: true
+  realtime:
+    track_offset_sec: 0.0
+
+metrics:
+  save_framewise: true
+  frame_format: npz
+  summary_precision: 6
+
+runtime:
+  output_dir: outputs/dataset_benchmark
+  workers: 4
+  log_level: INFO
+  seed: 42
+  dry_run: false
+  overwrite: false
+
+experiments:
+  grid: {}

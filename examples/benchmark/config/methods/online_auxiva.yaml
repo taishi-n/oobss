@@ -1,0 +1,12 @@
+id: online_auxiva
+label: Online AuxIVA
+type: online_auxiva
+enabled: true
+params:
+  forget: 0.99
+  inner_iter: 5
+  cov_scale: 1.0e-6
+  ref_mic: 0
+  spatial: ip1
+  source: gauss
+  covariance: ema

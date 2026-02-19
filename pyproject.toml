@@ -1,0 +1,82 @@
+[project]
+name = "oobss"
+version = "0.1.0"
+description = "Open online blind source separation toolkit"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Taishi Nakashima", email = "taishi@ieee.org" }]
+dependencies = [
+  "numpy>=2.2.6; python_version < '3.11'",
+  "numpy>=2.4.2; python_version >= '3.11'",
+  "scipy>=1.15.3",
+  "soundfile>=0.12.0",
+  "pyyaml>=6.0",
+  "omegaconf>=2.3.0",
+  "fast-bss-eval>=0.1.4",
+  "matplotlib>=3.10.0",
+]
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs>=1.6.1",
+  "mkdocs-material>=9.6.0",
+  "mkdocstrings[python]>=0.30.0",
+  "mkdocs-autorefs>=1.4.0",
+  "pymdown-extensions>=10.16.0",
+]
+realtime = [
+  "torch",
+  "torchrir",
+]
+
+[project.scripts]
+oobss = "oobss.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "commitizen>=3.29.0",
+  "git-cliff>=2.10.1",
+  "ruff>=0.12.2",
+  "ty>=0.0.14,<0.1",
+  "pytest>=9.0.2",
+  "mkdocs>=1.6.1",
+  "mkdocs-material>=9.6.0",
+  "mkdocstrings[python]>=0.30.0",
+  "mkdocs-autorefs>=1.4.0",
+  "pymdown-extensions>=10.16.0",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+changelog_file = "CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/oobss"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/docs",
+  "/LICENSE",
+  "/README.md",
+  "/pyproject.toml",
+]
+exclude = [
+  "/site",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.ty.src]
+include = ["src", "tests"]

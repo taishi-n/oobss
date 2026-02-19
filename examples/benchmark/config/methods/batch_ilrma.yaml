@@ -1,0 +1,12 @@
+id: batch_ilrma
+label: Batch ILRMA
+type: batch_ilrma
+enabled: true
+params:
+  n_iter: 100
+  spatial: ip1
+  source: ilrma_nmf
+  covariance: batch
+  n_basis: 10
+  ref_mic: 0
+  seed: 0

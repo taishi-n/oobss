@@ -1,0 +1,27 @@
+# Global Matplotlib defaults for online-ilrma figures
+font.family: sans-serif
+font.sans-serif: Helvetica Neue, Helvetica, DejaVu Sans, Arial
+axes.unicode_minus: False
+
+font.size: 9
+axes.titlesize: 9
+axes.labelsize: 9
+xtick.labelsize: 9
+ytick.labelsize: 9
+legend.fontsize: 7
+
+xtick.direction: in
+ytick.direction: in
+xtick.top: True
+ytick.right: True
+xtick.major.pad: 2
+ytick.major.pad: 2
+
+figure.figsize: 3.1496062992, 2.1653543307
+figure.dpi: 100
+savefig.bbox: standard
+savefig.pad_inches: 0.1
+
+lines.linewidth: 0.75
+axes.linewidth: 0.8
+grid.linewidth: 0.5

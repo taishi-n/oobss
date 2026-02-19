@@ -1,0 +1,16 @@
+id: online_ilrma
+label: Online ILRMA
+type: online_ilrma
+enabled: true
+params:
+  n_bases: 2
+  beta: 1
+  forget: 0.99
+  inner_iter: 5
+  cov_scale: 1.0e-6
+  ref_mic: 0
+  keep_h: false
+  random_state: 42
+  spatial: ip1
+  covariance: ema
+  nmf: multiplicative

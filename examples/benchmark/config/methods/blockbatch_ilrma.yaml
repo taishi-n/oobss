@@ -1,0 +1,14 @@
+id: blockbatch_ilrma
+label: Blockbatch ILRMA
+type: blockbatch_ilrma
+enabled: true
+params:
+  block_size: 200
+  overlap: 0
+  n_iter: 50
+  spatial: ip1
+  source: ilrma_nmf
+  covariance: batch
+  n_basis: 10
+  ref_mic: 0
+  seed: 0

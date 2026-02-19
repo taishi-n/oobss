@@ -1,0 +1,16 @@
+id: online_isnmf
+label: Online IS-NMF
+type: online_isnmf
+enabled: true
+params:
+  n_components: 10
+  analysis_channel: 0
+  beta: 2
+  forget: 0.99
+  inner_iter: 5
+  keep_h: false
+  eps: 1.0e-12
+  ref_mic: 0
+  random_state: 42
+  nmf: multiplicative
+  assignment: modulo
