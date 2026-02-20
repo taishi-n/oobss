@@ -394,6 +394,10 @@ class ILRMA(BaseIterativeSeparator):
 
         Returns
         -------
+        tuple[np.ndarray, np.ndarray]
+            Updated ``(basis, activation)`` tuple where:
+            - basis has shape ``(n_freq, n_basis)``
+            - activation has shape ``(n_frame, n_basis)``
         """
         updated = self.source_strategy.update(
             SourceModelRequest(
