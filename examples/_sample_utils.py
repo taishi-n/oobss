@@ -19,9 +19,9 @@ import yaml
 from oobss.benchmark.config_loader import load_method_configs
 from oobss.benchmark.methods import default_method_runner_registry
 from oobss.evaluation.metrics import compute_metrics
-from oobss.plot_utils import plot_nmf_factors, save_channel_spectrograms
 from oobss.separators.core import SeparationOutput
 from oobss.signal import STFTPlan, build_stft
+from oobss.visualization import plot_nmf_factors, save_channel_spectrograms
 
 
 _METHOD_CONFIG_DIR = (

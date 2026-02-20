@@ -3,7 +3,7 @@ from pathlib import Path
 import matplotlib
 import numpy as np
 
-from oobss.plot_utils import plot_nmf_factors, save_channel_spectrograms
+from oobss.visualization import plot_nmf_factors, save_channel_spectrograms
 
 
 matplotlib.use("Agg")

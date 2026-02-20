@@ -1,4 +1,4 @@
-"""Reusable plotting and evaluation helpers for BSS visualizations."""
+"""Plotting utilities for spectrogram-like representations."""
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ def plot_nmf_factors(
     vmax: float | None = None,
 ) -> plt.Figure:
     """Plot NMF factors and reconstructed spectrogram in a compact grid."""
-
     if x.ndim != 2:
         raise ValueError("x must be a 2-D array shaped (n_freq, n_frame)")
     if basis.ndim != 2:
@@ -94,7 +93,6 @@ def save_channel_spectrograms(
     vmax: float = 20.0,
 ) -> list[Path]:
     """Save one spectrogram image per channel from a frame-first spectrogram."""
-
     if spec.ndim != 3:
         raise ValueError("spec must be 3-D shaped (n_frame, n_freq, n_channel)")
 

@@ -8,8 +8,8 @@ from typing import Protocol, cast
 import numpy as np
 from fast_bss_eval import bss_eval_sources
 
+from oobss.evaluation.framewise import summarize_framewise_si_sdr
 from oobss.separators.core import PermutationRequest, PermutationStrategy
-from oobss.separators.eval_utils import summarize_framewise_si_sdr
 from oobss.separators.strategies import BssEvalPermutationStrategy
 
 BssevalMetrics = tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
@@ -38,7 +38,7 @@ def normalize_framewise_metrics(
     ----------
     framewise:
         Framewise metric dictionary, typically produced by
-        :func:`oobss.separators.eval_utils.summarize_framewise_si_sdr`.
+        :func:`oobss.evaluation.framewise.summarize_framewise_si_sdr`.
         If ``None``, ``None`` is returned.
 
     Returns
