@@ -7,6 +7,7 @@ from typing import Any, Iterable, Mapping
 
 from .config_schema import CommonExperimentConfig, common_config_to_dict
 
+
 @dataclass(frozen=True)
 class ExperimentRecipe:
     """Resolved benchmark recipe used by runners and task builders."""

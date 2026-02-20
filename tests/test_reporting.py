@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from oobss.experiments.reporting import generate_experiment_report
+from oobss.benchmark.reporting import generate_experiment_report
 
 
 def test_generate_experiment_report_writes_aggregate_files(tmp_path: Path) -> None:

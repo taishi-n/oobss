@@ -1,7 +1,8 @@
 import numpy as np
 import pytest
 
-from oobss.experiments.methods import STFTPlan, default_method_runner_registry
+from oobss.benchmark.methods import default_method_runner_registry
+from oobss.signal import STFTPlan
 
 
 def _run_blockbatch(

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from oobss.experiments.config_schema import parse_common_config
+from oobss.benchmark.config_schema import parse_common_config
 
 
 def test_parse_common_config_applies_defaults() -> None:

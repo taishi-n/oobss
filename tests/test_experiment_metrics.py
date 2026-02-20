@@ -1,7 +1,7 @@
 import numpy as np
 
-from oobss.experiments.config_schema import FrameEvalConfig
-from oobss.experiments.metrics import compute_metrics, normalize_framewise_metrics
+from oobss.benchmark.config_schema import FrameEvalConfig
+from oobss.evaluation.metrics import compute_metrics, normalize_framewise_metrics
 
 
 def test_normalize_framewise_metrics_adds_channel_aliases() -> None:

@@ -16,8 +16,8 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from oobss.configs import load_yaml, merge_overrides
-from oobss.experiments.config_schema import CommonExperimentConfig, parse_common_config
-from oobss.experiments.methods import validate_builtin_method_params
+from .config_schema import CommonExperimentConfig, parse_common_config
+from .methods import validate_builtin_method_params
 
 
 @dataclass(frozen=True)

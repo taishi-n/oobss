@@ -10,7 +10,7 @@ try:
     OmegaConf = importlib.import_module("omegaconf").OmegaConf
 except ModuleNotFoundError as exc:  # pragma: no cover
     raise RuntimeError(
-        "oobss.experiments.config_schema requires 'omegaconf'. Install dependencies with `uv sync`."
+        "oobss.benchmark.config_schema requires 'omegaconf'. Install dependencies with `uv sync`."
     ) from exc
 
 

@@ -79,7 +79,10 @@ uv run mkdocs serve
 - Dataset-wide benchmark with dataloader + aggregation/visualization:
 
   ```bash
-  uv run python examples/benchmark_dataset.py --sample-limit 2 --workers 1
+  uv run python examples/benchmark_dataset.py \
+    --sample-limit 2 \
+    --workers 1 \
+    --set dataset.root=/path/to/cmu_arctic_torchrir_dynamic_dataset
   ```
 
 - CMU ARCTIC + torchrir dataset build (torchrir side):
@@ -109,7 +112,7 @@ uv run mkdocs serve
 
 ## Major APIs
 
-For benchmark and multi-method execution, prefer the `oobss.experiments`
+For benchmark and multi-method execution, prefer the `oobss.benchmark`
 entrypoints (`ExperimentEngine`, `default_method_runner_registry`).
 Direct separator classes are lower-level building blocks.
 
@@ -206,14 +209,14 @@ output = separator.fit_transform_tf(
 estimate_tf = output.estimate_tf
 ```
 
-### 4. Experiment Engine (`oobss.experiments`)
+### 4. Experiment Engine (`oobss.benchmark`)
 
 Run method sweeps, aggregate results, and generate reports.
 
 - `ExperimentEngine`: task planning and execution
 - `expand_method_grids`: method-parameter grid expansion
 - `generate_experiment_report`: aggregate CSV/JSON/PDF outputs
-- `create_loader`: dataset loader factory (`torchrir_dynamic` built-in)
+- `oobss.dataloaders.create_loader`: dataset loader factory (`torchrir_dynamic` built-in)
 
 ```bash
 uv run python examples/benchmark_dataset.py \
@@ -228,14 +231,14 @@ Programmatic example:
 ```python
 from pathlib import Path
 
-from oobss.experiments.config_loader import (
+from oobss.benchmark.config_loader import (
     load_common_config_schema,
     load_method_configs,
 )
-from oobss.experiments.config_schema import common_config_to_dict
-from oobss.experiments.engine import ExperimentEngine, parse_grid_overrides
-from oobss.experiments.recipe import recipe_from_common_config
-from oobss.experiments.reporting import generate_experiment_report
+from oobss.benchmark.config_schema import common_config_to_dict
+from oobss.benchmark.engine import ExperimentEngine, parse_grid_overrides
+from oobss.benchmark.recipe import recipe_from_common_config
+from oobss.benchmark.reporting import generate_experiment_report
 
 cfg = load_common_config_schema(
     Path("examples/benchmark/config/common.yaml")

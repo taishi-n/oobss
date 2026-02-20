@@ -16,11 +16,12 @@ import numpy as np
 import soundfile as sf
 import yaml
 
-from oobss import STFTPlan, SeparationOutput, default_method_runner_registry
-from oobss.experiments.config_loader import load_method_configs
-from oobss.experiments.metrics import compute_metrics
-from oobss.experiments.methods import build_stft
+from oobss.benchmark.config_loader import load_method_configs
+from oobss.benchmark.methods import default_method_runner_registry
+from oobss.evaluation.metrics import compute_metrics
 from oobss.plot_utils import plot_nmf_factors, save_channel_spectrograms
+from oobss.separators.core import SeparationOutput
+from oobss.signal import STFTPlan, build_stft
 
 
 _METHOD_CONFIG_DIR = (
@@ -339,7 +340,7 @@ def compute_si_sdr(
     mixture: np.ndarray,
     filter_length: int = 1,
 ) -> SiSdrSummary:
-    """Compute SI-SDR metrics through :func:`oobss.experiments.metrics.compute_metrics`."""
+    """Compute SI-SDR metrics through :func:`oobss.evaluation.metrics.compute_metrics`."""
     ref, est, mix, n_sources, n_samples = _align_for_eval(reference, estimate, mixture)
 
     metrics = compute_metrics(

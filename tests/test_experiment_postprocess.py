@@ -1,6 +1,6 @@
 import numpy as np
 
-from oobss.experiments.postprocess import (
+from oobss.postprocess.separation import (
     ParameterEstimationResult,
     gaussian_source_model_weight,
     mixing_matrix_from_demixing_for_reference,

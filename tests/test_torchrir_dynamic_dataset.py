@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from oobss.dataset import TorchrirDynamicDatasetAdapter, create_loader
-from oobss.experiments.torchrir_dynamic import (
+from oobss.dataloaders import TorchrirDynamicDatasetAdapter, create_loader
+from oobss.dataloaders.torchrir_dynamic import (
     TorchrirDynamicDataset,
     build_torchrir_dynamic_dataloader,
     discover_torchrir_scene_paths,

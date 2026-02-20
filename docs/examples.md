@@ -63,24 +63,36 @@ uv run python examples/compare_wav_methods.py \
 Script: `examples/benchmark_dataset.py`
 
 This script is a thin compatibility wrapper around
-`oobss.experiments.run_suite run`.
+`oobss.benchmark.cli run`.
+
+Note: this command discovers tracks during planning, so even `--dry-run`
+requires a valid dataset root.
 
 ### Dry-run Command
 
 ```bash
-uv run python examples/benchmark_dataset.py --dry-run --sample-limit 2
+uv run python examples/benchmark_dataset.py \
+    --dry-run \
+    --sample-limit 2 \
+    --set dataset.root=/path/to/cmu_arctic_torchrir_dynamic_dataset
 ```
 
 ### Actual Run Command
 
 ```bash
-uv run python examples/benchmark_dataset.py --sample-limit 2 --workers 1
+uv run python examples/benchmark_dataset.py \
+    --sample-limit 2 \
+    --workers 1 \
+    --set dataset.root=/path/to/cmu_arctic_torchrir_dynamic_dataset
 ```
 
 Equivalent direct command:
 
 ```bash
-uv run python -m oobss.experiments.run_suite run --sample-limit 2 --workers 1
+uv run python -m oobss.benchmark.cli run \
+    --sample-limit 2 \
+    --workers 1 \
+    --set dataset.root=/path/to/cmu_arctic_torchrir_dynamic_dataset
 ```
 
 ### Expected Input

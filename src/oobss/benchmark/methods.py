@@ -5,7 +5,7 @@ Usage
 This module is typically used through CLI wrappers:
 
 - ``uv run python examples/benchmark_dataset.py --dry-run --sample-limit 2``
-- ``uv run python -m oobss.experiments.run_suite run --dry-run``
+- ``uv run python -m oobss.benchmark.cli run --dry-run``
 """
 
 from __future__ import annotations
@@ -16,8 +16,9 @@ import importlib
 from typing import Callable, Mapping, Protocol, TypeVar, cast
 
 import numpy as np
-from scipy.signal import ShortTimeFFT, get_window
+from scipy.signal import ShortTimeFFT
 
+from oobss.signal import STFTPlan, build_stft
 from oobss.separators.core import (
     ComponentAssignmentStrategy,
     CovarianceUpdateStrategy,
@@ -42,19 +43,10 @@ try:
     OmegaConf = importlib.import_module("omegaconf").OmegaConf
 except ModuleNotFoundError as exc:  # pragma: no cover
     raise RuntimeError(
-        "oobss.experiments.methods requires 'omegaconf'. Install dependencies with `uv sync`."
+        "oobss.benchmark.methods requires 'omegaconf'. Install dependencies with `uv sync`."
     ) from exc
 
 TParams = TypeVar("TParams")
-
-
-@dataclass(frozen=True)
-class STFTPlan:
-    """STFT configuration shared across methods."""
-
-    fft_size: int
-    hop_size: int
-    window: str
 
 
 @dataclass(frozen=True)
@@ -237,12 +229,6 @@ def validate_builtin_method_params(
     if schema is None:
         return
     _decode_params(params, schema)
-
-
-def build_stft(plan: STFTPlan, sample_rate: int) -> ShortTimeFFT:
-    """Build a :class:`scipy.signal.ShortTimeFFT` instance from ``plan``."""
-    win = get_window(plan.window, plan.fft_size, fftbins=True)
-    return ShortTimeFFT(win=win, hop=plan.hop_size, fs=sample_rate)
 
 
 def _channel_first_spectrogram(stft: ShortTimeFFT, mix: np.ndarray) -> np.ndarray:

@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 import soundfile as sf
 
-from oobss.dataset import TorchrirDynamicDatasetAdapter, create_loader
+from oobss.dataloaders import TorchrirDynamicDatasetAdapter, create_loader
 
 
 def _write_wave(path: Path, data: np.ndarray, sample_rate: int = 8000) -> None:

@@ -12,7 +12,7 @@ from oobss.separators.core import PermutationRequest, PermutationStrategy
 from oobss.separators.eval_utils import summarize_framewise_si_sdr
 from oobss.separators.strategies import BssEvalPermutationStrategy
 
-from .config_schema import FrameEvalConfig
+from oobss.benchmark.config_schema import FrameEvalConfig
 
 BssevalMetrics = tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
 

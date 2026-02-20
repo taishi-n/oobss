@@ -14,7 +14,9 @@ from typing import Iterable, Mapping, Optional, cast
 import numpy as np
 import soundfile as sf
 
-from oobss.dataset import DatasetLoader, TrackAudio, TrackHandle, create_loader
+from oobss.dataloaders import DatasetLoader, TrackAudio, TrackHandle, create_loader
+from oobss.evaluation.metrics import MetricsBundle, compute_metrics
+from oobss.signal import STFTPlan
 from oobss.separators.core import PermutationStrategy
 from oobss.separators.strategies import (
     BssEvalPermutationStrategy,
@@ -29,12 +31,7 @@ from .config_schema import (
     parse_metrics_config,
     parse_stft_config,
 )
-from .methods import (
-    MethodRunnerRegistry,
-    STFTPlan,
-    default_method_runner_registry,
-)
-from .metrics import MetricsBundle, compute_metrics
+from .methods import MethodRunnerRegistry, default_method_runner_registry
 from .recipe import ExperimentRecipe
 
 LOGGER = logging.getLogger(__name__)

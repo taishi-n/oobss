@@ -4,26 +4,26 @@ from typing import Iterable, Mapping
 import numpy as np
 import pytest
 
-from oobss.experiments.config_loader import MethodConfig, load_method_configs
-from oobss.experiments.config_schema import (
+from oobss.benchmark.config_loader import MethodConfig, load_method_configs
+from oobss.benchmark.config_schema import (
     EvaluationConfig,
     FrameEvalConfig,
     MetricsConfig,
 )
-from oobss.dataset import DatasetLoader, TrackAudio, TrackHandle
-from oobss.experiments.engine import (
+from oobss.dataloaders import DatasetLoader, TrackAudio, TrackHandle
+from oobss.benchmark.engine import (
     expand_method_grids,
     merge_method_grids,
     parse_grid_overrides,
 )
-from oobss.experiments.methods import (
-    STFTPlan,
+from oobss.benchmark.methods import (
     MethodRunnerRegistry,
     default_method_runner_registry,
 )
-from oobss.experiments.metrics import MetricsBundle
-from oobss.experiments.pipeline import ExperimentTask, run_task
+from oobss.evaluation.metrics import MetricsBundle
+from oobss.benchmark.pipeline import ExperimentTask, run_task
 from oobss.separators.core import SeparationOutput
+from oobss.signal import STFTPlan
 
 
 def test_method_runner_registry_accepts_overrides() -> None:
@@ -52,7 +52,7 @@ def test_method_runner_registry_accepts_overrides() -> None:
 
 
 def test_run_task_uses_injected_method_override(monkeypatch) -> None:
-    import oobss.experiments.pipeline as pipeline
+    import oobss.benchmark.pipeline as pipeline
 
     n_src = 2
     n_samples = 64

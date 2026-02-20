@@ -1,11 +1,6 @@
-"""Public dataset API.
+"""Dataset adapter and loader APIs."""
 
-This module re-exports dataset adapter primitives used by experiment pipelines.
-"""
-
-from __future__ import annotations
-
-from .experiments.dataset import (
+from .base import (
     AdapterFactory,
     BaseDatasetAdapter,
     DatasetLoader,
@@ -16,6 +11,7 @@ from .experiments.dataset import (
     create_loader,
     loader_registry,
 )
+from .torchrir_dynamic import TorchrirDynamicDataset, build_torchrir_dynamic_dataloader
 
 __all__ = [
     "AdapterFactory",
@@ -27,4 +23,6 @@ __all__ = [
     "build_torchrir_dynamic_adapter",
     "create_loader",
     "loader_registry",
+    "TorchrirDynamicDataset",
+    "build_torchrir_dynamic_dataloader",
 ]
