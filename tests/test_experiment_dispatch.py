@@ -98,6 +98,7 @@ def test_run_task_uses_injected_method_override(monkeypatch) -> None:
         *,
         filter_length: int,
         frame_cfg: FrameEvalConfig | None,
+        compute_permutation: bool,
         permutation_strategy,
     ) -> MetricsBundle:
         del (
@@ -106,6 +107,7 @@ def test_run_task_uses_injected_method_override(monkeypatch) -> None:
             sample_rate,
             filter_length,
             frame_cfg,
+            compute_permutation,
             permutation_strategy,
         )
         n_local_src = reference.shape[0]

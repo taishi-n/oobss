@@ -54,8 +54,9 @@ class RealtimeEvalConfig:
 class EvaluationConfig:
     """Evaluation configuration schema."""
 
-    filter_length: int = 512
+    filter_length: int = 1
     ref_mic: int = 0
+    compute_permutation: bool = True
     frame: FrameEvalConfig = field(default_factory=FrameEvalConfig)
     realtime: RealtimeEvalConfig = field(default_factory=RealtimeEvalConfig)
 

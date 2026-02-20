@@ -16,6 +16,8 @@ def test_parse_common_config_applies_defaults() -> None:
     assert cfg.dataset.root == "/tmp/dynamic"
     assert cfg.runtime.workers == 4
     assert cfg.stft.fft_size == 2048
+    assert cfg.evaluation.filter_length == 1
+    assert cfg.evaluation.compute_permutation is True
 
 
 def test_parse_common_config_rejects_unknown_key() -> None:

@@ -319,17 +319,31 @@ def _align_for_eval(
     estimate: np.ndarray,
     mixture: np.ndarray,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, int, int]:
-    n_sources = min(reference.shape[0], estimate.shape[0], mixture.shape[0])
+    if reference.ndim != 2 or estimate.ndim != 2:
+        raise ValueError("reference and estimate must be 2-D arrays (n_src, n_samples).")
+
+    mixture_eval = np.asarray(mixture)
+    if mixture_eval.ndim == 1:
+        mixture_samples = mixture_eval.shape[0]
+    elif mixture_eval.ndim == 2:
+        mixture_samples = mixture_eval.shape[1]
+    else:
+        raise ValueError("mixture must be 1-D or 2-D array.")
+
+    n_sources = min(reference.shape[0], estimate.shape[0])
     if n_sources <= 0:
         raise ValueError("No common source channels available for SI-SDR evaluation.")
 
-    n_samples = min(reference.shape[1], estimate.shape[1], mixture.shape[1])
+    n_samples = min(reference.shape[1], estimate.shape[1], mixture_samples)
     if n_samples <= 0:
         raise ValueError("No common samples available for SI-SDR evaluation.")
 
     ref = np.asarray(reference[:n_sources, :n_samples], dtype=np.float64)
     est = np.asarray(estimate[:n_sources, :n_samples], dtype=np.float64)
-    mix = np.asarray(mixture[:n_sources, :n_samples], dtype=np.float64)
+    if mixture_eval.ndim == 1:
+        mix = np.asarray(mixture_eval[:n_samples], dtype=np.float64)
+    else:
+        mix = np.asarray(mixture_eval[:, :n_samples], dtype=np.float64)
     return ref, est, mix, n_sources, n_samples
 
 
@@ -339,6 +353,7 @@ def compute_si_sdr(
     estimate: np.ndarray,
     mixture: np.ndarray,
     filter_length: int = 1,
+    compute_permutation: bool = True,
 ) -> SiSdrSummary:
     """Compute SI-SDR metrics through :func:`oobss.evaluation.metrics.compute_metrics`."""
     ref, est, mix, n_sources, n_samples = _align_for_eval(reference, estimate, mixture)
@@ -350,6 +365,7 @@ def compute_si_sdr(
         sample_rate=1,
         filter_length=int(filter_length),
         frame_cfg=None,
+        compute_permutation=bool(compute_permutation),
     )
     sdr_mix = np.asarray(metrics.sdr_mix, dtype=np.float64)
     sdr_est = np.asarray(metrics.sdr_est, dtype=np.float64)

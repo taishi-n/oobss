@@ -11,7 +11,7 @@ Run all methods:
 
 Run selected methods with SI-SDR evaluation:
 
-``uv run python examples/compare_wav_methods.py examples/data/mixture.wav --methods batch_auxiva online_ilrma --reference-dir examples/data/ref``
+``uv run python examples/compare_wav_methods.py examples/data/mixture.wav --methods batch_auxiva online_ilrma --reference-dir examples/data/ref --compute-permutation --filter-length 1``
 
 Enable plot outputs:
 
@@ -101,7 +101,13 @@ def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--filter-length",
         type=int,
         default=1,
-        help="BSSeval filter length.",
+        help="BSSeval filter length. Use 1 for SI-SDR-style evaluation.",
+    )
+    parser.add_argument(
+        "--compute-permutation",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Solve source permutation during metric computation.",
     )
     parser.add_argument(
         "--plot",
@@ -217,8 +223,9 @@ def main(argv: Sequence[str] | None = None) -> None:
             metrics = compute_si_sdr(
                 reference=reference,
                 estimate=estimate,
-                mixture=mix.T,
+                mixture=mix[:, ref_mic],
                 filter_length=args.filter_length,
+                compute_permutation=args.compute_permutation,
             )
             _print_metric_row(method, metrics.sdr_mix, metrics.sdr_est)
             method_summary["evaluation"] = {

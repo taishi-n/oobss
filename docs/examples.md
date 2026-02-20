@@ -40,6 +40,8 @@ uv run python examples/compare_wav_methods.py \
     examples/data/mixture.wav \
     --methods all \
     --reference-dir examples/data/ref \
+    --compute-permutation \
+    --filter-length 1 \
     --plot
 ```
 
@@ -47,6 +49,11 @@ uv run python examples/compare_wav_methods.py \
 
 - One mixture WAV file path.
 - Optional reference stem directory (`--reference-dir`) for SI-SDR evaluation.
+- SI-SDR baseline is computed from the selected reference microphone channel of
+  the mixture (`mix[:, ref_mic]`).
+- `--compute-permutation/--no-compute-permutation` switches permutation solving
+  for determined/overdetermined evaluations.
+- `--filter-length 1` computes SI-SDR-style batch metrics.
 
 ### Expected Output
 

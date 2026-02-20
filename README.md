@@ -41,7 +41,11 @@ uv run pytest
 Run the multi-method comparison example:
 
 ```bash
-uv run python examples/compare_wav_methods.py examples/data/mixture.wav --methods all
+uv run python examples/compare_wav_methods.py \
+  examples/data/mixture.wav \
+  --methods all \
+  --compute-permutation \
+  --filter-length 1
 ```
 
 ## Documentation
@@ -73,8 +77,15 @@ uv run mkdocs serve
     examples/data/mixture.wav \
     --methods all \
     --reference-dir examples/data/ref \
+    --compute-permutation \
+    --filter-length 1 \
     --plot
   ```
+
+  Notes: SI-SDR baseline uses the selected reference-microphone channel
+  (`mix[:, ref_mic]`), `--compute-permutation/--no-compute-permutation` can be
+  switched for determined/overdetermined evaluation setups, and
+  `--filter-length 1` gives SI-SDR-style batch metrics.
 
 - Dataset-wide benchmark with dataloader + aggregation/visualization:
 

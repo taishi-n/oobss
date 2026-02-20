@@ -83,17 +83,26 @@ def calc_si_sdr_framewise(
     compute_permutation : bool
         Whether to solve the permutation problem per frame.
     """
-    if ref.shape != est.shape:
-        raise ValueError(f"Shape mismatch between ref {ref.shape} and est {est.shape}")
+    if ref.ndim != 2 or est.ndim != 2:
+        raise ValueError("ref and est must be 2-D arrays (n_src, n_samples)")
+    if ref.shape[-1] != est.shape[-1]:
+        raise ValueError(
+            f"Shape mismatch between ref {ref.shape} and est {est.shape} (sample length)"
+        )
+    if not compute_permutation and ref.shape[0] != est.shape[0]:
+        raise ValueError(
+            "compute_permutation=False requires equal number of channels in ref and est"
+        )
 
-    n_src, n_samples = ref.shape
+    _, n_samples = ref.shape
+    n_est = est.shape[0]
     window = min(window, n_samples)
     hop = min(hop, window) if window > 0 else hop
 
     windows = Framing(window, hop, n_samples)
     n_win = windows.nwin
-    si_sdr = np.zeros((n_src, n_win), dtype=float)
-    perm = np.zeros((n_src, n_win), dtype=int)
+    si_sdr = np.zeros((n_est, n_win), dtype=float)
+    perm = np.zeros((n_est, n_win), dtype=int)
 
     for t, slc in enumerate(windows):
         ref_seg = ref[:, slc].T  # (n_samples_frame, n_src)
@@ -104,18 +113,18 @@ def calc_si_sdr_framewise(
                     ref_seg, est_seg, scaling=scaling
                 )
             else:
-                for ch in range(n_src):
+                for ch in range(n_est):
                     sdr_ch, _, _, _ = si_bss_eval(
                         ref_seg[:, [ch]],
                         est_seg[:, [ch]],
                         scaling=scaling,
                     )
                     si_sdr[ch, t] = sdr_ch[0]
-                perm[:, t] = np.arange(n_src)
+                perm[:, t] = np.arange(n_est)
         except ValueError as exc:
             LOGGER.error("SI-SDR evaluation failed at frame %s: %s", t, exc)
             si_sdr[:, t] = np.nan
-            perm[:, t] = np.arange(n_src)
+            perm[:, t] = np.arange(n_est)
 
     return si_sdr, perm
 
@@ -169,7 +178,7 @@ def framewise_si_sdr_summary(
             window,
             hop,
             scaling=scaling,
-            compute_permutation=False,
+            compute_permutation=compute_permutation,
         )
         summary["si_sdr_mix"] = si_sdr_mix
         summary["si_sdr_imp"] = si_sdr_est - si_sdr_mix

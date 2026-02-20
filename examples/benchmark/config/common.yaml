@@ -11,6 +11,7 @@ stft:
 
 evaluation:
   filter_length: 1
+  compute_permutation: true
   frame:
     window_sec: 5.0
     hop_sec: null

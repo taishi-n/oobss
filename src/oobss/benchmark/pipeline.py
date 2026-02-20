@@ -202,7 +202,7 @@ def run_task(
             else int(task.evaluation.ref_mic)
         )
         reference = track.stems[:, :, ref_mic]
-        mixture = track.mix.T
+        mixture = track.mix[:, ref_mic][None, :]
 
         metrics = compute_metrics(
             reference,
@@ -211,6 +211,7 @@ def run_task(
             track.sample_rate,
             filter_length=int(task.evaluation.filter_length),
             frame_cfg=task.evaluation.frame,
+            compute_permutation=bool(task.evaluation.compute_permutation),
             permutation_strategy=_resolve_permutation_strategy(
                 task.method.params,
                 default_filter_length=int(task.evaluation.filter_length),
