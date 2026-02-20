@@ -1,6 +1,6 @@
 [project]
 name = "oobss"
-version = "0.2.1"
+version = "0.2.2"
 description = "Open online blind source separation toolkit"
 readme = "README.md"
 license = { file = "LICENSE" }
